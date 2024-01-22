@@ -458,3 +458,11 @@ footer .follow i:hover{
     border: none;
     cursor: pointer;
 }
+
+#page-header1{
+    background-image: url("img/supreme.jpg");
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    background-position: center;
+}
