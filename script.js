@@ -14,18 +14,17 @@ if (close) {
     })
 }
 
-// Egyszerűsített függvény az elem kiválasztásához
+
 function getById(id) {
     return document.getElementById(id);
   }
   
-  // Fő alkalmazás-állapot
   var state = {
     products: [],
     editedId: ''
   };
   
-  // Renderelje ki a termékeket
+
   function renderProducts() {
     var productList = getById("product-list-component");
     productList.innerHTML = "";
@@ -43,19 +42,19 @@ function getById(id) {
   
       productList.appendChild(productCard);
   
-      // Szerkesztés gomb eseménykezelő
+    
       productCard.querySelector(".edit-product").addEventListener("click", function () {
         editProduct(product.id);
       });
   
-      // Törlés gomb eseménykezelő
+    
       productCard.querySelector(".delete-product").addEventListener("click", function () {
         deleteProduct(product.id);
       });
     });
   }
   
-  // Szerkesztett termék adatainak megjelenítése a formban
+  
   function renderEditProduct() {
     var editForm = getById("edit-product");
   
@@ -87,7 +86,7 @@ function getById(id) {
   
     editForm.innerHTML = editFormHTML;
   
-    // Szerkesztés elküldése
+ 
     getById('update-product').onsubmit = function (event) {
       event.preventDefault();
       var price = Number(event.target.elements.price.value);
@@ -96,7 +95,7 @@ function getById(id) {
   
       var foundIndex = state.products.findIndex(product => product.id === state.editedId);
   
-      // Állapot változtatás
+      
       state.products[foundIndex] = {
         id: state.editedId,
         name: name,
@@ -105,20 +104,20 @@ function getById(id) {
       };
       state.editedId = '';
   
-      // Renderelés
+      
       renderProducts();
       renderEditProduct();
     };
   }
   
-  // Termék hozzáadása
+
   getById("create-product").onsubmit = function (event) {
     event.preventDefault();
     var price = Number(event.target.elements.price.value);
     var name = event.target.elements.name.value;
     var isInStock = event.target.elements.isInStock.checked;
   
-    // Állapot változtatás
+   
     state.products.push({
       id: uuidv4(),
       name: name,
@@ -126,26 +125,26 @@ function getById(id) {
       isInStock: isInStock
     });
   
-    // Renderelés
+   
     renderProducts();
   };
   
-  // Szerkesztés gombra kattintás eseménykezelő
+  
   function editProduct(id) {
     state.editedId = id;
     renderEditProduct();
   }
   
-  // Törlés gombra kattintás eseménykezelő
+ 
   function deleteProduct(id) {
-    // Állapot változtatás
+    
     state.products = state.products.filter(product => product.id !== id);
   
-    // Renderelés
+    
     renderProducts();
   }
   
-  // Segédfüggvény a UUID létrehozásához
+  
   function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       var r = Math.random() * 16 | 0,
@@ -154,7 +153,5 @@ function getById(id) {
     });
   }
   
-  // Kezdeti renderelés
-  renderProducts();
-  
+
   
